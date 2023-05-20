@@ -1,0 +1,45 @@
+{% load static %}
+<header class="market-header header">
+    <div class="container-fluid">
+        <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="marketing-index.html"><img src="{% static 'upload/twi5.jpeg' %} " alt=""></a>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/service">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact">contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+
+
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'authen:logout' %}">Signout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">Login</a>
+                    </li>
+                    {% endif %}
+
+                </ul>
+                <form class="form-inline" method="POST" action="/search/">
+                    {% csrf_token %}
+                    <input class="form-control mr-sm-2" type="text" placeholder="write your query" name="query">
+                    <button class=" btn btn-outline-success my-2 my-sm-0 " type="submit ">Search</button>
+                </form>
+            </div>
+        </nav>
+    </div>
+    <!-- end container-fluid -->
+</header>
