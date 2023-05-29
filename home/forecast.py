@@ -233,8 +233,8 @@ def vis(target,df_concat,last_date,confidence, show_model_name,best_arima_model_
                        ), \
                 transform = ax.transAxes, color='black')
     
-    plt.savefig('static/forecast.png')
-    return 'forecast.png'
+    plt.savefig('static/images/forecast.png')
+    return '/static/images/forecast.png'
 
 def overall_vis(df, date, target, period, show_model_name=True,suggested_n_forcast=True, my_title = True, y_label_name = True, x_label_name = True, \
                color_past='dodgerblue', color_forecast='crimson',linestyle_past = 'solid', linestyle_forecast='--', \
