@@ -1,0 +1,5 @@
+stldecompose
+xgboost
+statsmodels==0.10.2
+forecast-tool
+pmdarima

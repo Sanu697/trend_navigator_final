@@ -9,8 +9,12 @@ import pandas as pd
 import plotly.express as px
 import tweepy
 from django.conf import settings
-
-
+from .forms import UploadForm
+from .models import Upload
+from . import forecast as fp
+import pandas as pd
+import matplotlib.pyplot as plt
+df = fp.get_data()
 
 def get_trending_tweet(query):
     ck=settings.TWITTER_CONSUMER_KEY
@@ -132,6 +136,26 @@ def service(request):
 def login(request):
     return render(request,'accounts/login.html')
 
+
+def upload(request):
+    form = UploadForm()
+    if request.method == 'POST':
+        form = UploadForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            df = pd.read_csv(form.instance.file, parse_dates=[form.instance.date])
+            period = 'y' #[y, m, d] 
+            date='Date'
+            newtarget='Volume'
+            out= fp.overall_vis(df, date, newtarget, period)
+        
+            request.session['result'] = out
+            return redirect('/upload')
+        
+    ctx = {
+        'form':form,
+    }    
+    return render(request,'home/upload.html',context=ctx)
 
 
 

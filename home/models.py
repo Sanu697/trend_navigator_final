@@ -21,7 +21,6 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
-
 class Subscriber(models.Model):
     email=models.EmailField()
 
@@ -33,3 +32,11 @@ class Feedback(models.Model):
 
     def __str__(self):
         return self.msg
+    
+
+class Upload(models.Model):
+    file=models.FileField(upload_to='files')
+    date = models.CharField(max_length=25, default='Date')
+    output = models.CharField(max_length=25, default='Close')
+    def __str__(self):
+        return self.name

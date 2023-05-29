@@ -1,0 +1,40 @@
+{% extends '../layout/base.html' %}
+{% load static %}
+{% block body %}
+{% include 'include/nav.html' %}
+<style>
+    body {
+        background-image: none;
+    }
+
+    .container {
+        margin-top: 300px;
+        margin-bottom: 300px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" value="analyse">
+            </form>
+        </div>
+    </div>
+    {{request.session.result}}
+    <img src="/static/{{request.session.result}}" alt="">
+</div>
+
+{%include 'include/footer.html' %}
+<!-- end footer -->
+
+<div class="dmtop ">Scroll to Top</div>
+
+</div>
+<script src="js/jquery.min.js "></script>
+<script src="js/tether.min.js "></script>
+<script src="js/bootstrap.min.js "></script>
+<script src="js/animate.js "></script>
+<script src="js/custom.js "></script>
+{% endblock body%}
